@@ -31,13 +31,20 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'birth_date' => [
+                'required',
+                'date',
+                'before_or_equal:' . now()->subYears(3)->toDateString(),    // لازم يكون عمره على الأقل 3 سنين
+                'after_or_equal:' . now()->subYears(100)->toDateString(),   // ولا يكون أكبر من 100 سنة
+            ],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'birth_date' => $request->birth_date,
             'password' => Hash::make($request->password),
         ]);
 
