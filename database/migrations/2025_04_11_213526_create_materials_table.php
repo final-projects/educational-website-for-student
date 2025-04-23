@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
             $table->foreignId('lesson_id')->constrained()->onDelete('cascade');
-            $table->enum('type', ['video', 'text']); // محتوى مرئي أو نصي
+            $table->enum('type', ['video', 'text','image']); // محتوى مرئي أو نصي
+            $table->string('url')->nullable(); // رابط الفيديو أو الصورة
             $table->string('title');
             $table->text('content'); // الفيديو يكون رابط أو النص نفسه
             $table->timestamps();
