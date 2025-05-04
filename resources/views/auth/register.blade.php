@@ -20,9 +20,7 @@
         <!-- Birth Date -->
         <div class="mt-4">
             <x-input-label for="birth_date" :value="__('Birth Date')" />
-
-            <x-text-input id="birth_date" class="block mt-1 w-full" type="date" name="birth_date" :value="old('birth_date')"
-                required autocomplete="bday" />
+            <x-text-input id="birth_date" class="block mt-1 w-full" type="text" name="birth_date" :value="old('birth_date')" required autocomplete="bday" />
 
             <x-input-error :messages="$errors->get('birth_date')" class="mt-2" />
         </div>

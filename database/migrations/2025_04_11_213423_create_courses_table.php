@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('level'); // primary, preparatory, etc
+            $table->foreignId('level_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

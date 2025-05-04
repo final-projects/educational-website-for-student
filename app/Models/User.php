@@ -52,9 +52,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Lesson::class)->withPivot('completed')->withTimestamps();
     }
 
-public function getAgeAttribute(): ?int
-{
-    return $this->birth_date ? Carbon::parse($this->birth_date)->age : null;
-}
-
+    public function getAgeAttribute(): ?int
+    {
+        return $this->birth_date ? Carbon::parse($this->birth_date)->age : null;
+    }
 }
