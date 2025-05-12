@@ -15,6 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         $this->call([LevelSeeder::class,AdminSeeder::class,CourseSeeder::class]);
-
+        // php artisan db:seed
     }
 }

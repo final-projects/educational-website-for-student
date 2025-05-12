@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('image')->nullable(); // Optional image field
+            $table->string('pdf')->nullable(); // Optional pdf field
             $table->foreignId('level_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
