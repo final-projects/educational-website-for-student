@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('birth_date');
-            $table->string('level')->nullable(); // primary, preparatory, etc
+            $table->foreignId('level_id')->nullable()->constrained()->nullOnDelete();
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();

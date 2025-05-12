@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var list<string>
      */
 
-    protected $fillable = ['name', 'birth_date', 'email', 'password', 'level'];
+    protected $fillable = ['name', 'birth_date', 'email', 'password', 'level_id'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->birth_date ? Carbon::parse($this->birth_date)->age : null;
     }
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Level;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -36,20 +38,29 @@ class RegisteredUserController extends Controller
             'birth_date' => [
                 'required',
                 'date',
-                'before_or_equal:' . now()->subYears(3)->toDateString(),    // لازم يكون عمره على الأقل 3 سنين
-                'after_or_equal:' . now()->subYears(100)->toDateString(),   // ولا يكون أكبر من 100 سنة
+                'before_or_equal:' . now()->subYears(3)->toDateString(),
+                'after_or_equal:' . now()->subYears(100)->toDateString(),
             ],
         ]);
 
+        // حساب العمر من تاريخ الميلاد
+        $age = Carbon::parse($request->birth_date)->age;
+
+        // الحصول على المستوى المناسب للعمر
+        $level = Level::where('min_age', '<=', $age)
+            ->where('max_age', '>=', $age)
+            ->first();
+
+        // إنشاء المستخدم مع ربط المستوى إن وُجد
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'birth_date' => $request->birth_date,
+            'level_id' => $level?->id,
             'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($user));
-
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));

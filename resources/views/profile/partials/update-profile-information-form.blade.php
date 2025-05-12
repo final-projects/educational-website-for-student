@@ -46,6 +46,29 @@
                 </div>
             @endif
         </div>
+        <div class="mt-4">
+            <x-input-label for="birth_date" :value="__('Birth Date')" />
+            <x-text-input id="birth_date" class="block mt-1 w-full" type="date" name="birth_date" :value="old('birth_date', $user->birth_date)" required autocomplete="bday" />
+            <x-input-error :messages="$errors->get('birth_date')" class="mt-2" />
+
+            @php
+                use Carbon\Carbon;
+                $birthDate = $user->birth_date ? Carbon::parse($user->birth_date) : null;
+                $age = $birthDate ? $birthDate->age : null;
+
+
+            @endphp
+
+            @if ($age !== null)
+                <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                    {{ __('Age') }}: <strong>{{ $age }}</strong>
+                </p>
+                <p class="text-sm text-gray-600 dark:text-gray-300">
+                    {{ __('Level') }}: <strong>{{ $user?->level?->name }}</strong>
+                </p>
+            @endif
+        </div>
+
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
