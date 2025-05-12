@@ -9,10 +9,14 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'level'];
+    protected $fillable = ['title', 'description', 'level_id', 'image'];
 
     public function lessons()
     {
         return $this->hasMany(Lesson::class);
+    }
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
     }
 }

@@ -30,10 +30,11 @@
                                     <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
                                         {{ $course->description }}
                                     </p>
-                                    <a href="#"
+                                    <a href="{{ route('courses.show', $course->id) }}"
                                         class="inline-block mt-auto text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg transition">
                                         View Course
-                                    </a>
+                                     </a>
+
                                 </div>
                             @empty
                                 <div class="col-span-3 text-center text-gray-500 dark:text-gray-400">
