@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Admin Dashboard
@@ -16,27 +16,58 @@
                 </div>
             </div>
 
-            {{-- Statistics --}}
+            {{-- Statistics + Actions --}}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {{-- Users Count --}}
+                {{-- Students --}}
                 <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow text-center">
-                    <h4 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">Users</h4>
-                    <p class="text-3xl font-bold text-indigo-600 dark:text-indigo-300">{{ $userCount }}</p>
+                    <h4 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">Students</h4>
+                    <p class="text-3xl font-bold text-indigo-600 dark:text-indigo-300 mb-4">{{ $studentCount }}</p>
+                    <div class="flex justify-center gap-2">
+                        <a href="{{ route('admin.students.index') }}"
+                            class="bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm px-3 py-1 rounded">
+                            View
+                        </a>
+                        <a href="{{ route('admin.students.create') }}"
+                            class="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 text-sm px-3 py-1 rounded">
+                            Add
+                        </a>
+                    </div>
                 </div>
 
-                {{-- Courses Count --}}
+
+                {{-- Courses --}}
                 <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow text-center">
                     <h4 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">Courses</h4>
-                    <p class="text-3xl font-bold text-green-600 dark:text-green-300">{{ $courseCount }}</p>
+                    <p class="text-3xl font-bold text-green-600 dark:text-green-300 mb-4">{{ $courseCount }}</p>
+                    <div class="flex justify-center gap-2">
+                        <a href="{{ route('admin.courses.index') }}"
+                            class="bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm px-3 py-1 rounded">
+                            View
+                        </a>
+                        <a href="{{ route('admin.courses.create') }}"
+                            class="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 text-sm px-3 py-1 rounded">
+                            Add
+                        </a>
+                    </div>
                 </div>
 
-                {{-- Levels Count --}}
+                {{-- Levels --}}
                 <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow text-center">
                     <h4 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">Levels</h4>
-                    <p class="text-3xl font-bold text-yellow-600 dark:text-yellow-300">{{ $levelCount }}</p>
+                    <p class="text-3xl font-bold text-yellow-600 dark:text-yellow-300 mb-4">{{ $levelCount }}</p>
+                    <div class="flex justify-center gap-2">
+                        <a href="{{ route('admin.levels.index') }}"
+                            class="bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm px-3 py-1 rounded">
+                            View
+                        </a>
+                        <a href="{{ route('admin.levels.create') }}"
+                            class="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 text-sm px-3 py-1 rounded">
+                            Add
+                        </a>
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
-</x-app-layout>
+</x-admin-layout>

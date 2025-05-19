@@ -15,6 +15,8 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
+        $course = $course->load('materials', 'level');
+
         return view('dashboard.courses.show', compact('course'));
     }
 }

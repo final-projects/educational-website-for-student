@@ -17,7 +17,7 @@ class DashboardController extends Controller
 
         return view('admin.dashboard.index', [
             'admin' => $admin,
-            'userCount' => User::count(),
+            'studentCount' => User::count(),
             'courseCount' => Course::count(),
             'levelCount' => Level::count(),
         ]);

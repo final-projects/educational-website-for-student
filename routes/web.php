@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminLoginController;
+use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\LevelController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,8 +30,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
 
     Route::middleware('auth:admin')->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index']);
+
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])
         ->name('dashboard');
+        Route::resource('courses', AdminCourseController::class);
+        Route::resource('students', StudentController::class);
+        Route::resource('levels', LevelController::class);
+        Route::get('/profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [AdminProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [AdminProfileController::class, 'destroy'])->name('profile.destroy');
+
     });
 });
 
