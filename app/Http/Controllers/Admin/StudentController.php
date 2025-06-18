@@ -25,13 +25,16 @@ class StudentController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
+            'birth_date' => 'required|date', // ✅ أضف التحقق
         ]);
 
         User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
+            'birth_date' => $validated['birth_date'], // ✅ أرسل القيمة لقاعدة البيانات
         ]);
+
 
         return redirect()->route('admin.students.index')->with('success', 'Student added successfully.');
     }
